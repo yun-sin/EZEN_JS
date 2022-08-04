@@ -1,2 +1,2 @@
-# EZEN
-학원 실습
+# EZEN_JS
+학원 JavaScript 실습
