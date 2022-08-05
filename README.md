@@ -1,6 +1,6 @@
 # EZEN_JS
 
-> 학원 JavaScript 실습 (2022-08-04~)
+> 학원 JavaScript 실습
 
 <br>
 
