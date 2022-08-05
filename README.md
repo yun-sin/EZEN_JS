@@ -8,7 +8,7 @@
 
    <br>
 
-  - ### Javascript 기본(프로그래밍 언어 활용)
+  - ### Javascript 기본 (프로그래밍 언어 활용)
 
     - Hello-Javascript
     - 변수와-데이터-타입
