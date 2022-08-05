@@ -6,8 +6,6 @@
 
 - ## [Javascript 커리큘럼]
 
-   <br>
-
   - ### Javascript 기본 (프로그래밍 언어 활용)
 
     - Hello-Javascript
