@@ -12,15 +12,20 @@
 </head>
 
 <body>
-  <ul class="list" id="mylist">
-
-  </ul>
+  <table id="mytable" border="1"></table>
 
   <script>
-    let tag = ""
+    let tag = "";
 
-    for (i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
+      tag += <tr>
+        for (let j=0; j<5; j++) {
 
+          tag += <td>
+            tag += ${i},${j}
+            tag += </td>
+        }
+        tag += </tr>
     }
   </script>
 </body>
