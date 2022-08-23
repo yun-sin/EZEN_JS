@@ -1,10 +1,10 @@
-// // 문제 1
+// 문제 1
 
-// for (let i = 0; i < 10; i++) {
-//   if (i % 2 == 1) {
-//     console.log(i);
-//   }
-// }
+for (let i = 0; i < 10; i++) {
+  if (i % 2 == 1) {
+    console.log(i);
+  }
+}
 
 // 문제 2
 
@@ -48,31 +48,56 @@ console.log("경우의 수는 %d개 입니다", cases)
 // 문제 5 
 // ?? JS로 테이블 만드는법 ??
 
+// 풀이 1
 for (i = 0; i < 4; i++) {
 
+  let str = "";
+
   for (j = 0; j < 4; j++) {
-    console.log(i + j)
+    str += i + j;
+
+    if (j + 1 < 4) {
+      str += " ";
+    }
   }
+  console.log(str);
 }
 
+// 풀이 2 (마지막 공백 없애기)
+for (i = 0; i < 4; i++) {
+
+  let str = "";
+
+  for (let j = i; j < i + 4; j++) {
+    str += j;
+
+    if (j + 1 < i + 4) {
+      str += " ";
+    }
+  }
+  console.log(str);
+}
+
+
+
+
+
+
 // 문제 6
-var sum = "";
+let sum = "";
 
 for (i = 1; i < 6; i++) {
   sum += ("%d", i);
   console.log(sum);
 }
 
+
 // 문제 7
-for (let number = 1; number <= 2; number++) {
-  if (number == 1) {
-    console.log
-  }
-  continue;
+const number = 2;
+// const number = 1;
 
-  if (i > 9) {
-
+for (let i = 4 - number; i < 10; i += 2) {
+  for (let j = 1; j < 10; j++) {
+    console.log("%d x %d = %d", i, j, i * j);
   }
-  break;
 }
-
