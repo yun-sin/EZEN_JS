@@ -221,16 +221,13 @@ console.log("반평균=%d점", avg_class);      // 문제 10
 var price = [500, 320, 100, 120, 92, 30];
 var qty = [291, 586, 460, 558, 18, 72];
 var data = [price, qty];
-/* var price_qty = 0; */
 var sum = 0;
 
 for (i = 0; i < data[0].length; i++) {
-  /* price_qty = data[0][i] * data[1][i];
-  console.log(price_qty); */
   sum += data[0][i] * data[1][i];
 }
 
-console.log("아이템 총 판매가격: %dg", sum);
+console.log("아이템 총 판매가격: %dg", sum * 0.9);
 
 
 
@@ -238,23 +235,19 @@ console.log("아이템 총 판매가격: %dg", sum);
 
 
 // 문제 12
-/* const ssn = [0, 1, 1, 2, 1, 3, 1, 0, 0, 0, 1, 2, 3]; */
-const ssn = [9, 5, 0, 7, 1, 0, 1, 0, 3, 4, 9, 2, 8];
-
+const ssn = [0, 1, 1, 2, 1, 3, 1, 0, 0, 0, 1, 2, 3];
 let value = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5];
-
 let data = [ssn, value];
 
 let sum = 0;
+
 for (i = 0; i < data[1].length; i++) {
   sum += data[0][i] * data[1][i];
 }
 sum = sum % 11;
 sum = (11 - sum) % 10;
 
-console.log(sum);
-
-if (sum == data[0][13]) {
+if (sum == data[0][12]) {
   console.log("유효한 주민등록번호");
 } else {
   console.log("유효하지 않은 주민등록번호");
