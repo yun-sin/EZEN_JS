@@ -31,7 +31,7 @@ function myGame(n) {
                     if (count[x + 1] == 3 || count[x + 1] == 6 || count[x + 1] == 9) {
                         clap++;
                         now_clap++;
-                        f(x + 1);
+                        return f(x + 1);
                     } else {
                         return f(x + 1);
 
@@ -43,6 +43,8 @@ function myGame(n) {
 
 
         f(0);
+
+
         if (now_clap == 0) {
             console.log(count);
         } else {

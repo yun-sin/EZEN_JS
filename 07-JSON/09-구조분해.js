@@ -35,6 +35,7 @@ console.log(name);
 const { height: h, weight: w } = data;
 console.log(h);
 console.log(w);
+// data안의 key의 이름은 바뀌지 않음. 변수명을 h 와 w로 선언한 것임.
 console.log(data);
 
 

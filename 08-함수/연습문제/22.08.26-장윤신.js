@@ -1,10 +1,10 @@
 // 문제 1
 function printStar(max) {
-    let count = "";
-    for (i = 0; i < max; i++) {
-        count = count + "*"
-        console.log(count);
-    }
+  let count = "";
+  for (i = 0; i < max; i++) {
+    count = count + "*"
+    console.log(count);
+  }
 
 }
 
@@ -15,13 +15,13 @@ printStar(5)
 
 // 문제 2
 function printRevStar(max) {
-    for (i = 0; i < max; i++) {
-        let count = "";
-        for (j = 0; j < max - i; j++) {
-            count += "*";
-        }
-        console.log(count);
+  for (i = 0; i < max; i++) {
+    let count = "";
+    for (j = 0; j < max - i; j++) {
+      count += "*";
     }
+    console.log(count);
+  }
 }
 
 printRevStar(5);
@@ -31,36 +31,36 @@ printRevStar(5);
 // 문제 3
 
 function myGame(n) {
-    let clap = 0;
+  let clap = 0;
 
-    for (i = 1; i <= n; i++) {
-        let count = "" + i;
-        let now_clap = 0;
+  for (i = 1; i <= n; i++) {
+    let count = "" + i;
+    let now_clap = "";
 
-        function f(x) {
-            if (x > count.length - 1) {
-                return now_clap;
-            } else {
-                if (count[x] == 3 || count[x] == 6 || count[x] == 9) {
-                    clap++;
-                    now_clap++;
-                    return f(x + 1);
-                } else {
-                    return f(x + 1);
-                }
-            }
-        }
-
-        f(0);
-
-        if (now_clap == 0) {
-            console.log(count);
+    function f(x) {
+      if (x > count.length - 1) {
+        return now_clap;
+      } else {
+        if (count[x] == 3 || count[x] == 6 || count[x] == 9) {
+          clap++;
+          now_clap += "짝";
+          return f(x + 1);
         } else {
-            console.log("짝(%d) --> %d번", count, now_clap)
+          return f(x + 1);
         }
+      }
     }
 
-    console.log("박수를 총 %d번 쳤습니다.", clap);
+    f(0);
+
+    if (now_clap == 0) {
+      console.log(count);
+    } else {
+      console.log("%s(%d) --> %d번", now_clap, count, now_clap.length)
+    }
+  }
+
+  console.log("박수를 총 %d번 쳤습니다.", clap);
 }
 
 myGame(35);
@@ -75,18 +75,18 @@ myGame(35);
 
 // 문제 4
 function printStar(max, current = 1) {
-    if (current > max) {
-        return;
-    } else {
-        let count = "";
+  if (current > max) {
+    return;
+  } else {
+    let count = "";
 
-        for (i = 0; i < current; i++) {
-            count += "*";
-        }
-
-        console.log(count);
-        printStar(max, current + 1);
+    for (i = 0; i < current; i++) {
+      count += "*";
     }
+
+    console.log(count);
+    printStar(max, current + 1);
+  }
 }
 printStar(5);
 
@@ -95,18 +95,18 @@ printStar(5);
 
 // 문제 5
 function printRevStar(max, current = 1) {
-    if (current > max) {
-        return;
-    } else {
-        let count = "";
+  if (current > max) {
+    return;
+  } else {
+    let count = "";
 
-        for (i = 0; i < max - current + 1; i++) {
-            count += "*";
-        }
-
-        console.log(count);
-        printRevStar(max, current + 1);
+    for (i = 0; i < max - current + 1; i++) {
+      count += "*";
     }
+
+    console.log(count);
+    printRevStar(max, current + 1);
+  }
 }
 
 printRevStar(5);

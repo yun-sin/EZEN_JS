@@ -36,4 +36,5 @@ something(5, 7, (a, b) => {
   console.log(a + b);
 });
 
-something(5, 7, (a, b) => console.log(a + b));
+/* something(5, 7, (a, b) => console.log(a + b)); */
+something(5, 7, (a, b) => a + b);
