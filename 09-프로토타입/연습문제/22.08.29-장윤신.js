@@ -109,7 +109,7 @@ Student.prototype = {
   },
 
   sayHello: function () {
-    console.log("나는 %s학과 %d학번 입니다.", this._major, this._ID);
+    console.log(`나는 ${this.major}학과 ${this.ID}학번 입니다.`);
   }
 };
 
@@ -142,15 +142,15 @@ Account.prototype = {
   },
 
   deposit: function (amount) {
-    return this._balance += amount;
+    return this.balance += amount;
   },
 
   withdraw: function (longamount) {
-    if (longamount > this._balance) {
+    if (longamount > this.balance) {
       console.log("잔액이 부족합니다.");
       return;
     }
-    return this._balance -= longamount;
+    return this.balance -= longamount;
   }
 }
 
