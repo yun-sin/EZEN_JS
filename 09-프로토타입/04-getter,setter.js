@@ -5,7 +5,7 @@ function User4() {
   this._email = null;
 }
 
-Object.defineProperty(User4.prototype, 'id', {
+Object.defineProperty(User4.prototype, "id", {
   get: function () {
     console.log("id에 대한 getter 호출됨");
     // 멤버변수의 값을 반환하는 기능
@@ -17,10 +17,10 @@ Object.defineProperty(User4.prototype, 'id', {
     // 파라미터의 값을 멤버변수에 복사하는 기능
     // 필요하다면 파라미터값을 가공하여 멤버변수에 복사할 수 있다.
     this._id = param;
-  }
+  },
 });
 
-Object.defineProperty(User4.prototype, 'email', {
+Object.defineProperty(User4.prototype, "email", {
   get: function () {
     console.log("email에 대한 getter 호출됨");
     return this._email;
@@ -28,7 +28,7 @@ Object.defineProperty(User4.prototype, 'email', {
   set: function (param) {
     console.log("email에 대한 setter 호출됨");
     this._email = param;
-  }
+  },
 });
 
 // 객체 생성하기
