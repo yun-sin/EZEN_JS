@@ -10,3 +10,8 @@ my.say();
 console.log(my.home.postcode);
 console.log(my.home.address);
 my.home.getAddress();
+
+/** import{name,property,say,home} */
+// 1) 순서 상관 X
+// 2) 필요 없는 기능은 생략 가능.
+// 3) 이름은 반드시 동일해야 함.
