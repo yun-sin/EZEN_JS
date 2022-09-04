@@ -39,7 +39,7 @@ console.log(Number.isNaN("123")); // false
 
 // 주어진 값이 정수인지 확인
 console.log(Number.isInteger("123")); // false
-console.log(Number.isInteger(123));
+console.log(Number.isInteger(123)); // true
 
 // 내장 함수 parseFloat()와 동일
 // 앞에서 소개한 Number() 함수와 동일

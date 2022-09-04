@@ -63,5 +63,4 @@ date3.setDate(14);
 date3.setHours(12);
 date3.setMinutes(16);
 date3.setSeconds(30);
-
 console.log(date3.toLocaleString());
