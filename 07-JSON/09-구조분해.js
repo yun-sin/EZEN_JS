@@ -24,10 +24,8 @@ const [x, y] = arr;
 console.log(x); // 100
 console.log(y); // 200
 
-
-
 // 구조 분해를 활용하여 필요한 데이터만 추출하기
-const data = { name: 'hello', age: 20, height: 172, weight: 85 };
+const data = { name: "hello", age: 20, height: 172, weight: 85 };
 const { name } = data;
 console.log(name);
 
@@ -37,8 +35,6 @@ console.log(h);
 console.log(w);
 // data안의 key의 이름은 바뀌지 않음. 변수명을 h 와 w로 선언한 것임.
 console.log(data);
-
-
 
 // 구조분해를 수행한 나머지를 별도로 분리하기
 // --> 'rest_b'라는 것은 단순한 변수 이름이므로 어떤 단어를 사용해도 무관
@@ -50,10 +46,10 @@ console.log(rest_b);
 
 // 구조분해를 활용하여 기존 데이터와 추가적인 값을 병합한 새로운 객체 생성
 // --> '...' 뒤에 오는 변수명은 반드시 원본 객체 이름이어야 한다.
-const origin = { name: 'javascript', age: 25 };
-const newdata1 = { ...origin, gender: 'M' };
+const origin = { name: "javascript", age: 25 };
+const newdata1 = { ...origin, gender: "M" };
 console.log(newdata1);
 
 // 구조분해를 통한 새로운 데이터 생성시 원본과 동일한 이름의 속성이 있다면 원본 데이서를 수정한다.
-const newdata2 = { ...origin, age: 30, gender: 'F' };
+const newdata2 = { ...origin, age: 30, gender: "F" };
 console.log(newdata2);
