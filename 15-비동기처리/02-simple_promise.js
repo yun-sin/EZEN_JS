@@ -44,7 +44,7 @@ mypromise
   })
   .catch(({ msg, d, e }) => {
     // [작업실패] -> reject() 실행됨
-    console.log("%s, d=%d, e=%d", msg, d, e);
+    console.error("%s, d=%d, e=%d", msg, d, e);
   })
   .finally(() => {
     // 성공 실패 여부에 상관 없이 무조건 실행되는 마무리 처리

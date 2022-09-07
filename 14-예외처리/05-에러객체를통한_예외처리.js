@@ -39,3 +39,4 @@ try {
 // 코드는 좌우중에서 우변을 먼저 실행하는데 우변에서 에러가 났으므로 변수에 값이 할당되지 않음.
 console.log(a); // null
 console.log(b); // null
+
