@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    연습문제-풀이.md 3 / 3
+  </head>
+  <body>
+    <h1><span id="s_date"></span>~<span id="e_date"></span></h1>
+    <input type="button" id="btn1" value="1일" />
+    <input type="button" id="btn2" value="7일" />
+    <input type="button" id="btn3" value="15일" />
+    <input type="button" id="btn4" value="30일" />
+    <input type="button" id="btn5" value="60일" />
+    <script type="text/javascript">
+      function setTerm(days) {
+        var today = new Date();
+        var start_date = new Date();
+        // 당일을 포함해야 하므로 주어진 날짜수에서 1을 빼야 한다.
+        start_date.setDate(start_date.getDate() - (days - 1));
+        document.getElementById("s_date").innerHTML = start_date.getFullYear() + "-" + (start_date.getMonth() + 1) + "-" + start_date.getDate();
+        document.getElementById("e_date").innerHTML = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+      }
+      // 페이지 열리면 자동 설정
+      setTerm(1);
+      document.querySelector("#btn1").addEventListener("click", (e) => setTerm(1));
+      document.querySelector("#btn2").addEventListener("click", (e) => setTerm(7));
+      document.querySelector("#btn3").addEventListener("click", (e) => setTerm(15));
+      document.querySelector("#btn4").addEventListener("click", (e) => setTerm(30));
+      document.querySelector("#btn5").addEventListener("click", (e) => setTerm(60));
+    </script>
+  </body>
+</html>

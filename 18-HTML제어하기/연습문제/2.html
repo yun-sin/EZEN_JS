@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .push {
+        color: blue;
+        height: 40px;
+        border: 3px solid black;
+      }
+      .active {
+        color: red;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" class="push">푸시알림 수신</button>
+
+    <script>
+      document.querySelector(".push").addEventListener("click", (e) => {
+        e.target.classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>

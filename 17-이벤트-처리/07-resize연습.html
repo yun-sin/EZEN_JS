@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      #container {
+        text-align: center;
+        font-size: 30px;
+      }
+
+      .box-xs {
+        background-color: #f00;
+      }
+      .box-sm {
+        background-color: #0f0;
+      }
+      .box-md {
+        background-color: #00f;
+      }
+      .box-lg {
+        background-color: #ff0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script>
+      /** 브라우저의 넓이를 구간별 문자열로 반환하는 함수 */
+      function check_responsive() {
+        var w = window.innerWidth; // 브라우저의 넓이
+        var responsive = "xs"; // 기본 사이즈 단위는 xs
+
+        // 브라우저의 구간 판정
+        if (w >= 1200) {
+          document.querySelector("#container").innerHTML = "<div class='box-xs'></div>";
+        } else if (w >= 992) {
+          document.querySelector("#container").innerHTML = "<div class='box-sm'></div>";
+        } else if (w >= 768) {
+          document.querySelector("#container").innerHTML = "<div class='box-md'></div>";
+        } else {
+          document.querySelector("#container").innerHTML = "<div class='box-lg'></div>";
+        }
+      } // end check_responsive()
+
+      window.addEventListener("resize", check_responsive);
+
+      // 페이지가 열리자마자 자동으로 1회 실행하도록 호출
+      check_responsive();
+    </script>
+  </body>
+</html>

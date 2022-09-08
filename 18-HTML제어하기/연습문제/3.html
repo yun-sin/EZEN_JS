@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="cal"><span class="date" id="s_date"></span> ~ <span class="date" id="e_date"></span></h1>
+    <input type="button" class="btn" data-date="1" value="1일" />
+    <input type="button" class="btn" data-date="7" value="7일" />
+    <input type="button" class="btn" data-date="15" value="15일" />
+    <input type="button" class="btn" data-date="30" value="30일" />
+    <input type="button" class="btn" data-date="60" value="60일" />
+
+    <script>
+      const todayDate = new Date();
+      document.querySelectorAll(".date").forEach((v, i) => {
+        v.innerHTML = todayDate.getFullYear() + "-" + (todayDate.getMonth() + 1) + "-" + todayDate.getDate();
+      });
+
+      document.querySelectorAll(".btn").forEach((v, i) => {
+        v.addEventListener("click", (e) => {
+          const startDate = new Date();
+          let vdd = v.dataset.date;
+
+          startDate.setDate(startDate.getDate() - vdd + 1);
+
+          document.querySelector("#s_date").innerHTML = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+        });
+      });
+    </script>
+  </body>
+</html>

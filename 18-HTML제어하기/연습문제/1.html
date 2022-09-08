@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="clock"></h1>
+    <script>
+      function watch() {
+        let date1 = new Date();
+
+        let yyyy = date1.getFullYear();
+
+        let mm = date1.getMonth() + 1;
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
+
+        let dd = date1.getDate();
+        if (dd < 10) {
+          dd = "0" + dd;
+        }
+
+        let hh = date1.getHours();
+        if (hh < 10) {
+          hh = "0" + hh;
+        }
+
+        let mi = date1.getMinutes();
+        if (mi < 10) {
+          mi = "0" + mi;
+        }
+
+        let ss = date1.getSeconds();
+        if (ss < 10) {
+          ss = "0" + ss;
+        }
+        document.querySelector("#clock").innerHTML = `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss}`;
+        console.log("hi");
+      }
+
+      setInterval(watch, 1000);
+    </script>
+  </body>
+</html>
