@@ -10,3 +10,4 @@ class HelloWorld {
 }
 
 export default new HelloWorld();
+//

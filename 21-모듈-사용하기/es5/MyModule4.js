@@ -9,5 +9,4 @@ class HelloWorld {
   }
 }
 
-// 클래스에 대한 객체를 모듈에 추가
-module.exports = new HelloWorld();
+const hw = new HelloWorld();

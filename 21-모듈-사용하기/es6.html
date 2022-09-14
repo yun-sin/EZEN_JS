@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>ES6 style 모듈 사용</h1>
+
+    <script type="text/javascript">
+      const BB = 100;
+    </script>
+
+    <!-- <script> 태그에 type="module" 속성을 추가하여 ES6 스타일로 export된 기능을 참조할 수 있다. -->
+    <!-- type="module" 속성을 갖는 경우 <script> 태그 안에 코드를 넣을 수 있다. -->
+    <!-- type="module" 속성을 갖는 경우 다른 <script>태그와 연동되지 않는다.-->
+    <script type="module">
+      // 이 블록 안은 모듈의 참조만 가능하고 동작하는 코드를 작성할 수 없다.
+      import my1 from "./es6/MyModule1.js";
+
+      console.group("MyModule1");
+      my1();
+
+      // type="module" 속성을 갖는 블록에서의 변수 --> 다른 블록에서 인식 불가
+      // type="text/javascript" 속성을 갖는 블록에서의 변수 --> 모든 블록에서 인식 가능
+      console.log(BB);
+      console.groupEnd();
+
+      // 이 안에서 지금까지의 웹 페이지 관련 내용은 모두 유효함.
+      // 단, 블록간의 연동만 안됨.
+    </script>
+
+    <script type="module">
+      import { name, property, say, home } from "./es6/MyModule2.js";
+
+      console.group("MyModule2");
+      console.log(name);
+      console.log(property.id);
+      console.log(property.type);
+      say();
+
+      console.log(home.postcode);
+      console.log(home.address);
+      home.getAddress();
+      console.groupEnd();
+    </script>
+
+    <script type="module">
+      import MyClass from "./es6/MyModule3.js";
+
+      const mc = new MyClass();
+
+      console.group("MyModule3");
+      console.log(mc.age);
+      mc.say();
+      console.groupEnd();
+    </script>
+
+    <script type="module">
+      import zzz from "./es6/MyModule4.js";
+
+      console.group("MyModule4");
+      zzz.say();
+      console.groupEnd();
+    </script>
+  </body>
+</html>

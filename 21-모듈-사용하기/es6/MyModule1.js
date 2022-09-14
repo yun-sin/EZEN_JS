@@ -9,4 +9,5 @@ function helloWorld() {
 }
 
 // 하나의 모듈에서 단 하나의 기능만을 내보낼 때
+// import할 때 이름을 마음대로 설정가능
 export default helloWorld;

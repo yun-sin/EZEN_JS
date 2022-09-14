@@ -12,5 +12,4 @@ class MyClass {
   }
 }
 
-// 클래스 자체를 모듈에 추가
-module.exports = MyClass;
+const mc = new MyClass();

@@ -10,7 +10,7 @@
     <h1>ES5 style 모듈 사용</h1>
 
     <!-- 기본적으로 <script> 태그는 분리되어 있어도 코드가 연동된다. -->
-    <script>
+    <script type="text/javascript">
       const x = 100;
     </script>
     <script>
@@ -19,5 +19,38 @@
     <script>
       console.log(x + y);
     </script>
+
+    <!-- 다른 모듈 파일을 참조할 경우 <script> 태그에 src 속성으로 모듈의 경로를 명시 -->
+    <!-- 별도의 import 처리는 필요 없음  -->
+    <!-- src 속성을 갖는 script 태그는 내부에 소스코드를 포함할 수 없다. -->
+    <!-- 참조되는 모듈파일의 소스코드가 이 위치에 복붙 된다고 이해할 수 있다. -->
+    <script src="es5/MyModule1.js"></script>
+    <script src="es5/MyModule2.js"></script>
+    <script src="es5/MyModule3.js"></script>
+    <script src="es5/MyModule4.js"></script>
+
+    <!-- <script> 태그는 연속성을 갖기 때문에 모듈을 활용하는 코드는 별도의 <script> 태그에 작성해야 한다. -->
+    <script type="text/javascript">
+      console.group("MyModule1");
+      helloWorld();
+      console.groupEnd();
+
+      console.group("MyModule2");
+      console.log(name);
+      console.log(property);
+      say();
+      console.log(home);
+      console.groupEnd();
+
+      console.group("MyModule3");
+      mc.say();
+      console.groupEnd();
+
+      console.group("MyModule4");
+      hw.say();
+      console.groupEnd();
+    </script>
+
+    <!-- 각 모듈들이 하나의 html 안에서 모든 내용이 병합되는 원리이므로 각 모듈파일간의 원리이므로 각 모듈파일간의 변수, 함수, 클래스, 객체 이름이 중복될 경우 에러가 발생할 수 있다. -->
   </body>
 </html>
