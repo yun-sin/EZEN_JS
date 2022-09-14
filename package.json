@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/yunsinjang/EZEN_JS/issues"
   },
-  "homepage": "https://github.com/yunsinjang/EZEN_JS#readme"
+  "homepage": "https://github.com/yunsinjang/EZEN_JS#readme",
+  "dependencies": {
+    "animations.js": "^1.0.10",
+    "aos": "^2.3.4",
+    "chart.js": "^3.9.1"
+  },
+  "devDependencies": {
+    "prettier": "2.7.1"
+  }
 }
