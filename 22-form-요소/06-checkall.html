@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>전체선택<input type="checkbox" id="all_check" data-checked=".hobby" /></label>
+    <hr />
+    <label><input type="checkbox" class="hobby" value="soccor" />축구</label>
+    <label><input type="checkbox" class="hobby" value="basketball" />농구</label>
+    <label><input type="checkbox" class="hobby" value="baseball" />야구</label>
+
+    <br />
+
+    <label>전체선택<input type="checkbox" id="all_check2" data-checked=".food" /></label>
+    <hr />
+    <label><input type="checkbox" class="food" value="a" />a</label>
+    <label><input type="checkbox" class="food" value="b" />b</label>
+    <label><input type="checkbox" class="food" value="c" />c</label>
+
+    <script type="module">
+      /** 단일 처리 할 경우 */
+      // document.querySelector("#all_check").addEventListener("change", (e) => {
+      //   document.querySelectorAll(".hobby").forEach((v, i) => {
+      //     v.checked = e.currentTarget.checked;
+      //   });
+      // });
+
+      /** data-checked 속성을 개발자가 정의하여 자동화 할 경우 */
+      document.querySelectorAll("input[data-checked]").forEach((v, i) => {
+        v.addEventListener("change", (e) => {
+          const targetS = e.currentTarget.dataset.checked;
+          console.log(targetS);
+          document.querySelectorAll(targetS).forEach((v2, i2) => {
+            v2.checked = e.currentTarget.checked;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
