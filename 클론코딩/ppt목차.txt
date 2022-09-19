@@ -1,0 +1,81 @@
+1) 최종 완성 스크린샷
+2) HTML DOM 구조
+3) 각 파트별 CSS 코드 구현과 결과 (부분 스크린샷)
+4) 각 파트별 JS 코드 구현과 결과 (부분 스크린샷)
+--> JS가 사용되지 않은 경우 생략 가능
+5) 작업 도중 겪은 에러 상황과 해결 과정
+6) 총 작업 시간 및 소감
+
+<html>
+	<head>
+		<meta>
+		<meta>
+		<meta>
+		<title>
+		<link>
+		<link>
+		<link>
+	<body>
+		<div id=“top_container”>
+			<div>
+				<a>
+				<div>
+					<a>
+					<a>
+					<a>
+		<header>
+			<img>
+			<div>
+				<h1>
+		<div id=“main-container”>
+			<div>
+				<div>
+					<img>
+				<div>
+					<h1>
+					<br>
+					<p>
+						<span>
+					<p>
+					<hr>
+					<p>
+			<div>
+				<div>
+					<h1>
+					<br />
+					<h4></h4>
+					<p></p>
+					<br />
+					<h4></h4>
+					<p></p>
+					<br />
+					<h4></h4>
+					<p></p>
+					<br />
+					<h4></h4>
+					<p></p>
+					<br />
+					<h4></h4>
+					<p></p>
+				<div>
+					<img>
+			<hr>
+			<div>
+				 <h1>Contact</h1>
+				<br />
+				<p>
+				<p>
+					<b>
+				<p>
+				<form>
+					<p>
+						<input>
+					<p>
+						<input>
+					<p>
+						<input>
+					<p>
+						<button>
+		<footer>
+			<p>
+				<a>
