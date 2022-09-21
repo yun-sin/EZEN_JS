@@ -1,0 +1,227 @@
+@import "./responsive.scss";
+@import "./common.scss";
+
+h3 {
+  margin: 10px 0px;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+p {
+  margin: 15px 0px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+hr {
+  margin: 20px 0px;
+  border-top: 1px solid #eee;
+}
+// Desktop first
+#gnb {
+  width: 1200px;
+  height: 67.97px;
+  padding: 16px 0px;
+  box-sizing: border-box;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  line-height: 1.5;
+  font-size: 24px;
+
+  .gnb_menu {
+    display: block;
+    width: 53.53px;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &:hover {
+      background-color: rgb(200, 200, 200);
+    }
+  }
+
+  .gnb_mail {
+    display: block;
+    width: 45px;
+    height: 100%;
+    padding: 16px 0;
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+#main_container {
+  width: 1200px;
+  margin: auto;
+  text-align: center;
+
+  .main {
+    width: 100%;
+
+    // main1
+    .main_img_container {
+      width: 100%;
+      display: flex;
+
+      .food_img {
+        width: 100%;
+        display: block;
+        padding: 0px 8px;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .img_num {
+      width: 234px;
+      height: 38.5px;
+      margin: auto;
+      padding: 32px 0px;
+      a {
+        display: inline-block;
+        width: 39px;
+        height: 38.5px;
+        font-size: 15px;
+        padding: 8px 16px;
+        box-sizing: border-box;
+        line-height: 1.5;
+        float: left;
+
+        &:hover {
+          background-color: #000;
+          color: white;
+        }
+
+        &:nth-child(2) {
+          background-color: #000;
+          color: white;
+
+          &:hover {
+            background-color: rgb(200, 200, 200);
+            color: #000;
+          }
+        }
+      }
+    }
+
+    // main2
+    .profile_text {
+      padding: 32px 0px;
+
+      h4 {
+        margin: 10px 0px;
+        height: 30px;
+        b {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+
+      h6 {
+        height: 24px;
+        margin: 10px 0px;
+
+        i {
+          font-size: 16px;
+          font-style: italic;
+        }
+      }
+    }
+  }
+  // footer
+  #footer {
+    width: 100%;
+    display: flex;
+    text-align: left;
+
+    .footer {
+      width: 33%;
+      padding: 0px 8px;
+
+      @include tablet {
+        width: 100%;
+      }
+    }
+
+    // footer 2
+    ul li {
+      height: 50px;
+      padding: 16px;
+      line-height: 1.5;
+
+      &:hover {
+        background-color: rgb(200, 200, 200);
+      }
+
+      img {
+        width: 50px;
+        margin-right: 16px;
+        float: left;
+      }
+    }
+    .blog_large {
+      font-size: 18px;
+    }
+
+    // footer 3
+    .footer3 {
+      line-height: 1.5;
+      span {
+        display: inline-block;
+        color: #fff;
+        background-color: #616161;
+        margin: 0 0 16px;
+        padding: 0px 8px;
+        font-size: 12px;
+        height: 22.5px;
+
+        &:first-child {
+          font-size: 15px;
+          background-color: #000;
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  #main_container,
+  #gnb,
+  #footer {
+    width: 90%;
+    display: block;
+    padding: 8px 16px;
+    flex-direction: column;
+  }
+
+  .main_img_container {
+    width: 100%;
+    flex-direction: column;
+
+    .food_img {
+      width: 100%;
+    }
+  }
+
+  .main2 {
+    img {
+      width: 90%;
+    }
+  }
+
+  .footer {
+    width: 100%;
+  }
+}

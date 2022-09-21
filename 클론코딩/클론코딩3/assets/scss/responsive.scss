@@ -1,0 +1,15 @@
+// 반응형 웹을 위한 미디어쿼리 구간 정의
+$breakpoint-tablet: 600px;
+
+// 타블렛을 위한 미디어쿼리
+@mixin tablet {
+  @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
