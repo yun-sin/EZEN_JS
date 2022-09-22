@@ -1,0 +1,320 @@
+h1 {
+  font-size: 64px;
+  margin: 10px 0px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 30px;
+  margin: 10px 0px;
+  letter-spacing: 4px;
+}
+
+p {
+  margin: 15px 0px;
+  font-size: 15px;
+  line-height: 2;
+}
+
+a {
+  text-decoration: none;
+}
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+body {
+  height: 100%;
+  line-height: 1.5;
+}
+
+i {
+  font-style: italic;
+}
+
+#header {
+  display: block;
+  min-height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../img/wedding_couple.jpg");
+  text-align: center;
+  color: white;
+
+  .header_text {
+    display: block;
+    width: 400px;
+    height: 226px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.main {
+  width: 100%;
+  display: block;
+  line-height: 1.5;
+  padding: 64px 16px;
+  background-color: #ffdddd;
+  filter: grayscale(50%);
+
+  .main1 {
+    max-width: 980px;
+    margin: auto;
+
+    h1 {
+      font-size: 36px;
+      color: #757575;
+    }
+
+    img {
+      width: 100%;
+      margin: 32px 0px;
+    }
+
+    p:last-child {
+      display: block;
+      text-align: center;
+      margin: 15px 0px;
+
+      a {
+        display: inline-block;
+        width: 185px;
+        height: 60px;
+        background-color: black;
+        color: white;
+        font-size: 18px;
+        line-height: 2;
+        padding: 12px 24px;
+        border-radius: 5px;
+        box-sizing: border-box;
+
+        &:hover {
+          background-color: rgb(200, 200, 200);
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+.main2 {
+  background-image: url("../img/flowers.jpg");
+  min-height: 100%;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  div {
+    width: 445px;
+    height: 203px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+
+    h3 {
+      font-size: 30px;
+      margin: 10px 0px;
+    }
+  }
+}
+
+.main3 {
+  max-width: 980px;
+  margin: auto;
+
+  h1 {
+    font-size: 36px;
+    b {
+      font-weight: 400;
+      color: #757575;
+    }
+  }
+
+  img {
+    width: 100%;
+    margin: 64px 0px;
+  }
+  .row {
+    width: 100%;
+    height: 160px;
+  }
+  .main3_2 {
+    width: 50%;
+    height: 160px;
+    float: left;
+    text-align: center;
+
+    &::after {
+      clear: both;
+    }
+  }
+}
+
+.main4 {
+  filter: grayscale(0);
+
+  text-align: center;
+  h1 {
+    font-size: 36px;
+  }
+
+  h1,
+  > p {
+    letter-spacing: 4px;
+  }
+
+  button {
+    width: 181px;
+    height: 64px;
+    border-radius: 5px;
+    background-color: #f44336;
+    border: none;
+    color: white;
+    margin: 24px 0px;
+
+    &:hover {
+      color: black;
+      background-color: rgb(200, 200, 200);
+    }
+    p {
+      font-size: 24px;
+      margin: 0;
+    }
+  }
+}
+
+footer {
+  width: 100%;
+  height: 90px;
+  background-color: black;
+  text-align: center;
+  padding: 16px 0px;
+  box-sizing: border-box;
+  margin-bottom: 1px;
+  p {
+    color: white;
+    a {
+      color: white;
+      text-decoration: underline;
+
+      &:hover {
+        color: aqua;
+      }
+    }
+  }
+}
+.gnb {
+  width: 100%;
+  height: 54.5px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  background-color: rgb(255, 255, 255, 0.75);
+  &:hover {
+    background-color: white;
+  }
+
+  .gnb_menu {
+    display: block;
+    width: 25%;
+    height: 38.5px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 15px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    width: 100%;
+    line-height: 1.5;
+    color: black;
+
+    &:hover {
+      background-color: rgb(200, 200, 200);
+      &:last-child {
+        background-color: black;
+
+        color: white;
+      }
+    }
+  }
+}
+
+// 팝업창
+#event {
+  width: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: scale(0, 0) translate(-50%, -50%);
+  text-align: center;
+  background-color: white;
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px 0 rgb(0, 0, 0, 20%), 0 4px 20px 0 rgb(0, 0, 0, 19%);
+  z-index: 11;
+  h1 {
+    font-size: 36px;
+    margin: 10px 0px;
+    letter-spacing: 4px;
+  }
+  p {
+    margin: 15px 0px;
+    letter-spacing: 1px;
+
+    &:last-of-type {
+      font-style: italic;
+    }
+  }
+  form input {
+    width: 100%;
+    height: 40.5px;
+    border: 1px solid gray;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  .btn {
+    width: 50%;
+    height: 38.5px;
+    float: left;
+    color: white;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    font-size: 15px;
+    cursor: pointer;
+
+    &.btn1 {
+      background-color: green;
+    }
+    &.btn2 {
+      background-color: red;
+    }
+
+    &:hover {
+      background-color: rgb(200, 200, 200);
+      color: black;
+    }
+  }
+  // display: none;
+}
+
+#cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: -1;
+}
