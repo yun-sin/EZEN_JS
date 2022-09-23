@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/style.min.css" />
+  </head>
+  <body>
+    <!-- main_container -->
+
+    <!-- header -->
+    <header id="header">
+      <div class="header_text">
+        <h1></h1>
+        <h2></h2>
+        <h2></h2>
+      </div>
+    </header>
+
+    <!-- main1 -->
+    <div class="main">
+      <div id="Jane" class="main1">
+        <h1><b>Jane & John</b></h1>
+        <img src="assets/img/wedding_couple2.jpg" alt="" />
+        <p>
+          <i></i>
+        </p>
+        <br />
+        <p><a href=""></a></p>
+      </div>
+    </div>
+
+    <!-- main2 -->
+    <div class="main2">
+      <div>
+        <h1></h1>
+        <br />
+        <h3></h3>
+      </div>
+    </div>
+
+    <!-- main3 -->
+    <div class="main" id="Wedding">
+      <div class="main3">
+        <h1><b></b></h1>
+        <img src="assets/img/wedding_location.jpg" alt="" />
+        <div class="row">
+          <div class="main3_2">
+            <h2></h2>
+            <p></p>
+            <p></p>
+          </div>
+          <div class="main3_2">
+            <h2></h2>
+            <p></p>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- main4 -->
+    <div class="main main4">
+      <h1>HOPE YOU CAN MAKE IT!</h1>
+      <p>Kindly Respond By January, 2017</p>
+      <button id="RSVP"><p>RSVP</p></button>
+    </div>
+
+    <!-- footer -->
+    <footer>
+      <p>Powered by <a href="">w3.css</a></p>
+    </footer>
+
+    <div class="hide">&nbsp;</div>
+    <div class="hide">&nbsp;</div>
+
+    <!-- gnb -->
+    <div class="gnb">
+      <a href="#" class="gnb_menu">Home</a>
+      <a href="#Jane" class="gnb_menu">Jane & John</a>
+      <a href="#Wedding" class="gnb_menu">Wedding</a>
+      <a href="#RSVP" class="gnb_menu">RSVP</a>
+    </div>
+
+    <div id="event">
+      <div>
+        <h1>CAN YOU COME?</h1>
+        <p>We really hope you can make it.</p>
+        <form action="">
+          <input type="text" placeholder="Name(s)" />
+        </form>
+        <p>Sincerely. John & Jane</p>
+        <div class="btn btn1"><a>Going</a></div>
+        <div class="btn btn2"><a>Can't come</a></div>
+      </div>
+    </div>
+
+    <div id="cover"></div>
+
+    <script>
+      document.querySelector("#RSVP").addEventListener("click", (e) => {
+        document.querySelector("#event").style.display = "block";
+        // document.querySelector("#event").style.position = "fixed";
+        // document.querySelector("#event").style.top = "50%";
+        // document.querySelector("#event").style.left = "50%";
+        // document.querySelector("#event").style.transform = "translate(-50%,-50%)";
+        document.querySelector("#event").style.transition = "0.5s";
+
+        document.querySelector("#event").style.transform = "scale(1,1) translate(-50%, -50%)";
+
+        document.querySelector("#cover").style.zIndex = "10";
+      });
+
+      document.querySelectorAll(".btn").forEach((v, i) => {
+        v.addEventListener("click", (e) => {
+          document.querySelector("#event").style.transition = "0s";
+          document.querySelector("#event").style.transform = "scale(0,0) translate(-50%, -50%)";
+          document.querySelector("#cover").style.zIndex = "-1";
+
+          console.log("close");
+        });
+      });
+    </script>
+  </body>
+</html>
