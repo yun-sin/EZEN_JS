@@ -64,8 +64,8 @@
 
     <!-- main4 -->
     <div class="main main4">
-      <h1>HOPE YOU CAN MAKE IT!</h1>
-      <p>Kindly Respond By January, 2017</p>
+      <h1></h1>
+      <p></p>
       <button id="RSVP"><p>RSVP</p></button>
     </div>
 
@@ -103,14 +103,8 @@
     <script>
       document.querySelector("#RSVP").addEventListener("click", (e) => {
         document.querySelector("#event").style.display = "block";
-        // document.querySelector("#event").style.position = "fixed";
-        // document.querySelector("#event").style.top = "50%";
-        // document.querySelector("#event").style.left = "50%";
-        // document.querySelector("#event").style.transform = "translate(-50%,-50%)";
         document.querySelector("#event").style.transition = "0.5s";
-
         document.querySelector("#event").style.transform = "scale(1,1) translate(-50%, -50%)";
-
         document.querySelector("#cover").style.zIndex = "10";
       });
 
