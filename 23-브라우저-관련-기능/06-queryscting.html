@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="console"></h1>
+
+    <a href="06-queryscting.html?weekday=mon&a=1&b=2&c=3">링크1</a>
+
+    <a href="06-queryscting.html?weekday=sun&d=100&e=200&f=300">링크2</a>
+
+    <hr />
+
+    <a href="05-location.html">5번 예제로 이동</a>
+
+    <script>
+      // ?weekday=mon&a=1&b=2&c=3
+      console.log(location.search);
+
+      // weekday=mon&a=1&b=2&c=3
+      const query = location.search.substring(1);
+      console.log(query);
+
+      // ['weekday=mon', 'a=1', 'b=2', 'c=3']
+      const params = query.split("&");
+      console.log(params);
+
+      // {weekday: 'mon', a: '1', b: '2', c: '3'}
+      const mydata = {};
+      params.map((v, i) => {
+        let data = v.split("=");
+        mydata[data[0]] = data[1];
+      });
+      console.log(mydata);
+
+      let msg = "";
+      switch (mydata.weekday) {
+        case "mon":
+          msg = "월요일입니다.";
+          break;
+        case "sun":
+          msg = "일요일입니다.";
+          break;
+      }
+
+      document.querySelector("#console").innerHTML = msg;
+    </script>
+  </body>
+</html>
