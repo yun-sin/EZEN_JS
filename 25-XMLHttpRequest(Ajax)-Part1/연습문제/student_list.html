@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    td,
+    th {
+      border: 1px solid black;
+      text-align: center;
+      font-size: 20px;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+
+  <body>
+    <table id="table">
+      <tbody id="tbody">
+        <tr>
+          <th>이름(name)</th>
+          <th>학생번호(id)</th>
+          <th>학년(grade)</th>
+          <th>연락처(tel)</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <script type="module">
+      import ajaxHelper from "../../helper/AjaxHelper.js";
+      const tbody = document.querySelector(".tbody");
+
+      (async (e) => {
+        let json = null;
+
+        try {
+          json = await ajaxHelper.requestAsync("http://localhost:3001/student");
+          console.log(json);
+        } catch (e) {
+          console.error(e);
+          alert(`[${e.status}] ${e.text}\n${e.msg}`);
+          return;
+        }
+
+        console.log(json);
+
+        json.forEach((v, i) => {
+          const tr = document.createElement("tr");
+          const tdName = document.createElement("td");
+          const nameLink = document.createElement("a");
+          const tdId = document.createElement("td");
+          const tdGrade = document.createElement("td");
+          const tdTel = document.createElement("td");
+
+          // 이름
+          nameLink.innerHTML = v.name;
+          // nameLink.setAttribute("href", "http://localhost:3001/student/" + v.id);
+          nameLink.setAttribute("href", "#");
+          nameLink.classList.add("btn");
+          nameLink.setAttribute("data-id", v.id);
+          tdName.appendChild(nameLink);
+          tr.appendChild(tdName);
+
+          // 번호, 학년, 연락처
+          tdId.innerHTML = v.id;
+          tr.appendChild(tdId);
+          tdGrade.innerHTML = v.grade;
+          tr.appendChild(tdGrade);
+          tdTel.innerHTML = v.tel;
+          tr.appendChild(tdTel);
+
+          document.querySelector("#tbody").appendChild(tr);
+        });
+        document.querySelectorAll(".btn").forEach((v2, i2) => {
+          v2.addEventListener("click", (e) => {
+            e.preventDefault();
+            sessionStorage.setItem("ID", v2.dataset.id);
+            location.href = "student_info.html";
+          });
+        });
+      })();
+    </script>
+    <script></script>
+  </body>
+</html>

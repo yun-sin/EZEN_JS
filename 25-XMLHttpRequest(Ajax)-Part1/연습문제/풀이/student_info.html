@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="list"></ul>
+
+    <script type="module">
+      import ajaxHelper from "../../../helper/AjaxHelper.js";
+      import utilHelper from "../../../helper/UtilHelper.js";
+
+      const URL = "http://localhost:3001/student";
+
+      // 생성된 객체를 JSON으로 변환
+      // const query = new URLSearchParams(location.search);
+      // const params = Object.fromEntries(query);
+      // console.log(params.id);
+
+      const params = utilHelper.getUrlParams();
+
+      (async () => {
+        let json = null;
+
+        try {
+          json = await ajaxHelper.requestAsync(`${URL}/${params.id}`);
+        } catch (e) {
+          alert(`[${e.status}] ${e.text}\n${e.msg}`);
+          return;
+        }
+
+        const list = document.querySelector("#list");
+
+        for (const key in json) {
+          const li = document.createElement("li");
+          li.innerHTML = `<strong>${key}</strong>: ${json[key]}`;
+          list.appendChild(li);
+        }
+      })();
+    </script>
+  </body>
+</html>

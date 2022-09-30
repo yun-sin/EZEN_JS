@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      dt {
+        font-size: 20px;
+        font-weight: bold;
+        border-top: 1px solid black;
+        width: 310px;
+        position: absolute;
+      }
+
+      dt:last-of-type {
+        border-bottom: 1px solid black;
+        padding-bottom: 5px;
+      }
+
+      dd {
+        font-size: 16px;
+        padding: 5px 0 5px 70px;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <dl id="console"></dl>
+
+    <!-- infomation -->
+    <script type="module">
+      import ajaxHelper from "../../helper/AjaxHelper.js";
+
+      const read = document.querySelector("#read");
+      const ID = sessionStorage.getItem("ID");
+
+      let json = null;
+
+      (async () => {
+        try {
+          json = await ajaxHelper.requestAsync("http://localhost:3001/student/" + ID);
+        } catch (e) {
+          console.error(e);
+          alert(`[${e.status}] ${e.text}\n${e.msg}`);
+          return;
+        }
+
+        for (let key in json) {
+          const dt = document.createElement("dt");
+          const dd = document.createElement("dd");
+
+          dt.innerHTML = key;
+          dd.innerHTML = json[key];
+
+          document.querySelector("#console").appendChild(dt);
+          document.querySelector("#console").appendChild(dd);
+        }
+      })();
+    </script>
+  </body>
+</html>

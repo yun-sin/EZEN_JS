@@ -67,13 +67,11 @@
     <!-- 주소창의 정보를 읽고 그 값에 맞는 화면 구현 -->
     <script type="module">
       import ajaxHelper from "../helper/AjaxHelper.js";
-      // 0.1초마다 dislplay block 인지 none인지 검사
       setInterval(async () => {
-        // 검사 후 block이 아니라면 (none이라면) data에 따른 값을 화면에 출력
         if (container.style.display !== "block") {
           const query = new URLSearchParams(location.search);
           if (query.get("deptno") !== null) {
-            console.log("새로고침 하였습니다." + query.get("deptno"));
+            console.log("화면 갱신 하였습니다." + query.get("deptno"));
             // URL에서 ?뒤의 값을 가져옴
             const deptno2 = query.get("deptno");
 
