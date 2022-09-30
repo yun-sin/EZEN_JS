@@ -5,9 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #list2 li {
+        float: left;
+        display: block;
+        margin: 5px;
+        background-color: #ccc;
+        color: white;
+        cursor: pointer;
+      }
+
+      .active {
+        background-color: aqua !important;
+      }
+    </style>
   </head>
   <body>
     <ul id="list"></ul>
+    <ul id="list2"></ul>
+
+    <!-- <script>
+      const uid = location.search.split("=").reverse()[0];
+      console.log(uid);
+
+      document.querySelectorAll(".name").forEach((v, i) => {
+        if (v.classList.contains(uid)) {
+          v.classList.add(active);
+        } else {
+          v.classList.remove(active);
+        }
+      });
+    </script> -->
 
     <script type="module">
       import ajaxHelper from "../../../helper/AjaxHelper.js";
@@ -24,7 +52,6 @@
 
       (async () => {
         let json = null;
-
         try {
           json = await ajaxHelper.requestAsync(`${URL}/${params.id}`);
         } catch (e) {
@@ -33,12 +60,51 @@
         }
 
         const list = document.querySelector("#list");
-
         for (const key in json) {
           const li = document.createElement("li");
           li.innerHTML = `<strong>${key}</strong>: ${json[key]}`;
           list.appendChild(li);
         }
+
+        let add = null;
+        add = await document.querySelectorAll(".name").forEach((v, i) => {
+          if (v.classList.contains(params.id)) {
+            v.classList.add("active");
+          }
+        });
+      })();
+    </script>
+
+    <script type="module">
+      import ajaxHelper from "../../../helper/AjaxHelper.js";
+
+      let json2 = null;
+      (async () => {
+        try {
+          json2 = ajaxHelper.requestAsync("http://localhost:3001/student");
+        } catch (e) {
+          console.error(e);
+          alert(`[${e.status}] ${e.text}\n${e.msg}`);
+          return;
+        }
+
+        const getData = () => {
+          json2.then((appData) => {
+            for (let key2 in appData) {
+              console.log(appData[key2].name);
+              const li2 = document.createElement("li");
+              li2.innerHTML = appData[key2].name;
+              li2.classList.add(appData[key2].id);
+              li2.classList.add("name");
+              document.querySelector("#list2").appendChild(li2);
+              li2.addEventListener("click", (e) => {
+                location.search = "id=" + appData[key2].id;
+              });
+            }
+          });
+        };
+
+        getData();
       })();
     </script>
   </body>

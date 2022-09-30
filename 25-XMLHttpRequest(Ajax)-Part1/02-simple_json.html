@@ -30,7 +30,7 @@
 
           if (ajax.readyState == XMLHttpRequest.DONE) {
             if (ajax.status == 200) {
-              // ajax.responseText --> 통신을 통해 읽어온 내뇽
+              // ajax.responseText --> 통신을 통해 읽어온 내용
               // 데이터 타입이 string 이므로 JSON객체로 변환이 필요함.
               const json = JSON.parse(ajax.responseText);
               // const json = {"msg": "안녕하세요. Ajax"};
