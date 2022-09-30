@@ -44,7 +44,10 @@
         var isMobile = false;
 
         // userAgent값에 iPHone, iPad, Android라는 문자열이 하나라도 검색되면, 모바일로 간주한다.
-        if (tmpUser.indexOf("iphone") > -1 || tmpUser.indexOf("ipad") > -1 || tmpUser.indexOf("android") > -1) return isMobile;
+        if (tmpUser.indexOf("iphone") > -1 || tmpUser.indexOf("ipad") > -1 || tmpUser.indexOf("android") > -1) {
+          isMobile = true;
+        }
+        return isMobile;
       }
 
       document.querySelector("#browser").innerHTML = getWebBrowserName();

@@ -34,12 +34,21 @@
       document.querySelector("#location1").innerHTML = decodeURIComponent(location.href);
       document.querySelector("#location2").innerHTML = location.host;
       document.querySelector("#location3").innerHTML = location.hostname;
-      document.querySelector("#location4").innerHTML = location.hash;
-      document.querySelector("#location5").innerHTML = decodeURIComponent(location.pathname);
-      document.querySelector("#location6").innerHTML = location.port;
-      document.querySelector("#location7").innerHTML = location.protocol;
-      document.querySelector("#location8").innerHTML = location.search;
 
+      document.querySelector("#location4").innerHTML = location.hash;
+      // '#' 문자 뒤 URL의 프래그먼트 식별자를 값으로 하는 DOMString입니다.
+
+      document.querySelector("#location5").innerHTML = decodeURIComponent(location.pathname);
+      // '/' 문자 뒤 URL의 경로를 값으로 하는 DOMString입니다.
+
+      document.querySelector("#location6").innerHTML = location.port;
+
+      document.querySelector("#location7").innerHTML = location.protocol;
+
+      document.querySelector("#location8").innerHTML = location.search;
+      // '?' 문자 뒤 URL의 쿼리스트링을 값으로 하는 DOMString입니다.
+
+      /** 버튼 이벤트 처리 */
       document.querySelector("#btn1").addEventListener("click", (e) => {
         if (confirm("정말 이동하시겠습니까?")) {
           location.href = "04-geolocation.html";
