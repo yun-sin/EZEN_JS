@@ -23,19 +23,7 @@
   <body>
     <ul id="list"></ul>
     <ul id="list2"></ul>
-
-    <!-- <script>
-      const uid = location.search.split("=").reverse()[0];
-      console.log(uid);
-
-      document.querySelectorAll(".name").forEach((v, i) => {
-        if (v.classList.contains(uid)) {
-          v.classList.add(active);
-        } else {
-          v.classList.remove(active);
-        }
-      });
-    </script> -->
+    <a href="student_list.html">목록으로</a>
 
     <script type="module">
       import ajaxHelper from "../../../helper/AjaxHelper.js";
@@ -47,18 +35,21 @@
       // const query = new URLSearchParams(location.search);
       // const params = Object.fromEntries(query);
       // console.log(params.id);
-
       const params = utilHelper.getUrlParams();
 
       (async () => {
         let json = null;
+        let json2 = null;
+
         try {
           json = await ajaxHelper.requestAsync(`${URL}/${params.id}`);
+          json2 = await ajaxHelper.requestAsync(URL);
         } catch (e) {
           alert(`[${e.status}] ${e.text}\n${e.msg}`);
           return;
         }
 
+        console.log(json);
         const list = document.querySelector("#list");
         for (const key in json) {
           const li = document.createElement("li");
@@ -66,22 +57,30 @@
           list.appendChild(li);
         }
 
-        let add = null;
-        add = await document.querySelectorAll(".name").forEach((v, i) => {
-          if (v.classList.contains(params.id)) {
-            v.classList.add("active");
+        console.log(json2);
+        const list2 = document.querySelector("#list2");
+        for (const key2 in json2) {
+          console.log(json2[key2]);
+          const li2 = document.createElement("li");
+          const a = document.createElement("a");
+          a.innerHTML = json2[key2].name;
+          a.setAttribute("href", `student_info.html?id=${json2[key2].id}`);
+          li2.appendChild(a);
+          if (json2[key2].id == json.id) {
+            li2.classList.add("active");
           }
-        });
+          list2.appendChild(li2);
+        }
+
+        document.createElement();
       })();
     </script>
-
+    <!-- 
     <script type="module">
       import ajaxHelper from "../../../helper/AjaxHelper.js";
 
-      let json2 = null;
       (async () => {
         try {
-          json2 = ajaxHelper.requestAsync("http://localhost:3001/student");
         } catch (e) {
           console.error(e);
           alert(`[${e.status}] ${e.text}\n${e.msg}`);
@@ -106,6 +105,6 @@
 
         getData();
       })();
-    </script>
+    </script> -->
   </body>
 </html>

@@ -26,7 +26,7 @@ function getLuckyResult() {
 
   // Promise를 리턴받는 과정을 await 키워드를 적용하여 처리, 예외처리도 적용
   try {
-    // getLuckyResult에서 resolve()가 호출되면서 전닳란 파라미터는 그냥 리턴
+    // getLuckyResult에서 resolve()가 호출되면서 전달한 파라미터는 그냥 리턴
     result = await getLuckyResult();
     console.log("%s, a=%d, b=%d, c=%d", result.msg, result.a, result.b, result.c);
   } catch (e) {

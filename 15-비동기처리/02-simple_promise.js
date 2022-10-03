@@ -9,7 +9,7 @@ function random(n1, n2) {
 function getLuckyResult() {
   // Promise 객체는 resolve 함수와, reject 함수를 파라미터로 받는 콜백이 필요함.
   return new Promise(function (resolve, reject) {
-    // 이 안에서 비동기 작접을 시작함.
+    // 이 안에서 비동기 작업을 시작함.
     setTimeout(() => {
       console.log("당신의 추첨 결과는...?");
       const lucky = random(1, 9);

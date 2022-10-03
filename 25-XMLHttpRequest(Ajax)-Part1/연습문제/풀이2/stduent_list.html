@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>학생목록</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>학생번호</th>
+                <th>이름</th>
+                <th>학년</th>
+                <th>연락처</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+           
+        </tbody>
+    </table>
+
+    <script type="module">
+        import ajaxHelper from '../helper/AjaxHelper.js';
+        const URL = 'http://localhost:3001/student';
+
+        (async () => {
+            let json = null;
+
+            try {
+                json = await ajaxHelper.requestAsync(URL);
+            } catch (e) {
+                alert(`[${e.status}] ${e.text}\n${e.msg}`);
+                return;
+            }
+
+            json.forEach((v, i) => {
+                console.log(v);
+                // <tr>
+                //     <td>...</td>
+                //     <td><a href="...">...</a></td>
+                //     <td>...</td>
+                //     <td>...</td>
+                // </tr>
+
+                const tr = document.createElement('tr');
+
+                const td1 = document.createElement('td');
+                td1.innerHTML = v.id;
+                tr.appendChild(td1);
+
+                const td2 = document.createElement('td');
+                const a = document.createElement('a');
+                a.setAttribute('href', `student_info.html?id=${v.id}`);
+                a.innerHTML = v.name;
+                td2.appendChild(a);
+                tr.appendChild(td2);
+
+                const td3 = document.createElement('td');
+                td3.innerHTML = `${v.grade}학년`;
+                tr.appendChild(td3);
+
+                const td4 = document.createElement('td');
+                td4.innerHTML = v.tel;
+                tr.appendChild(td4);
+
+                document.querySelector("#tbody").appendChild(tr);
+            });
+        })();
+    </script>
+
+</body>
+</html>
