@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #loading {
+        width: 100px;
+        height: 100px;
+        background: url(img/loading.gif) no-repeat/cover;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999999;
+        display: none;
+      }
+
+      #loading.active {
+        display: block;
+      }
+
+      body {
+        font-family: Arial;
+        padding-top: 127px;
+      }
+
+      #header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        z-index: 1000;
+        padding: 0px 10px 5px 10px;
+        box-sizing: border-box;
+      }
+
+      #list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      #list li {
+        width: 150px;
+        margin: 10px;
+        flex: 1;
+      }
+
+      #list li a img {
+        display: block;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+
+      #list li span {
+        display: block;
+        font-size: 14px;
+        margin: 5px auto;
+        height: 30px;
+        padding: 0 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading"></div>
+
+    <div id="header">
+      <h1>Kakao Image Search</h1>
+
+      <form id="searchForm">
+        <fieldset>
+          <input type="search" id="query" placeholder="Search ..." />
+          <button type="submit">검색</button>
+        </fieldset>
+      </form>
+    </div>
+
+    <ul id="list">
+      <!-- <li>
+        <a href="#" target="_blank" title="제목">
+          <img src="img/noimage.jpg" />
+          <span>제목이 위치할 곳</span>
+        </a>
+      </li> -->
+    </ul>
+
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script>
+      const KAKAO_REST_KEY = "9bd9f69d6c9fd1d1e706c5e89dcded62";
+
+      let currentPage = 1;
+
+      let queryKeyword = null;
+
+      let isEnd = false;
+
+      document.querySelector("#searchForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const queryField = document.querySelector("#query");
+        queryKeyword = queryField.value.trim();
+
+        if (!queryKeyword) {
+          alert("검색어를 입력하세요");
+          queryField.focus();
+          return;
+        }
+
+        currentPage = 1;
+        get_image_search();
+      });
+
+      window.addEventListener("scroll", (e) => {
+        if (isEnd || document.querySelector("#loading").classList.contains("active")) {
+          return;
+        }
+
+        const scrollTop = window.scrollY;
+
+        const widowHeight = window.screen.availHeight;
+
+        const documentHeight = document.body.scrollHeight;
+
+        if (scrollTop + widowHeight >= documentHeight) {
+          currentPage++;
+          get_image_search;
+        }
+      });
+
+      /** Ajax 요청 후 결과를 화면에 HTMl로 출력하는 함수 */
+      async function get_image_search() {
+        const loading = document.querySelector("#loading");
+
+        loading.classList.add("active");
+
+        const list = document.querySelector("#list");
+
+        if (currentPage == 1) {
+          Array.from(list.getElementsByTagName("li")).forEach((v, i) => {
+            list.removeChild(v);
+          });
+        }
+
+        let json = null;
+
+        try {
+          json = await axios.get("https://dapi.kakao.com/v2/search/image", {
+            params: {
+              query: queryKeyword,
+              page: currentPage,
+            },
+            headers: {
+              Authorization: `KakaoAK ${KAKAO_REST_KEY}`,
+            },
+          });
+
+          console.log(json);
+        } catch (error) {
+          console.error(`[Error Code] ${error.code}`);
+          console.error(`[Error Message] ${error.message}`);
+          let alertMsg = error.message;
+
+          if (error.response !== undefined) {
+            const errorMsg = `${error.response.status} error - ${error.response.statusText}`;
+            console.error(`[HTTP Status] ${errorMsg}`);
+
+            alertMsg += `\n${errorMsg}`;
+          }
+
+          alert(alertMsg);
+          return;
+        } finally {
+          loading.classList.remove("active");
+        }
+
+        const { data } = json;
+
+        ifEnd = data.meta.is_end;
+
+        data.documents.map((v, i) => {
+          const li = document.createElement("li");
+
+          const a = document.createElement("a");
+          a.setAttribute("href", v.doc_url);
+          a.setAttribute("target", "_blank");
+          a.setAttribute("title", v.display_sitename);
+
+          const img = document.createElement("img");
+          img.setAttribute("src", v.thumbnail_url);
+
+          const span = document.createElement("span");
+          span.innerHTML = v.display_sitename;
+
+          a.appendChild(img);
+          a.appendChild(span);
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

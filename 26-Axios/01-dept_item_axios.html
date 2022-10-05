@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #loading {
+        width: 100px;
+        height: 100px;
+        background: url(img/loading.gif) no-repeat/cover;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999999;
+        display: none;
+      }
+
+      #loading.active {
+        display: block;
+      }
+      dt {
+        font-weight: bold;
+        margin: 10px 0px;
+        font-size: 20px;
+      }
+
+      dt::before {
+        content: "ㅇ";
+        padding-right: 5px;
+      }
+
+      dd {
+        font-weight: normal;
+        margin-bottom: 30px;
+        border-left: 15px;
+        font-size: 16px;
+      }
+
+      #container {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading"></div>
+    <h1>Async Await Axios</h1>
+
+    <a href="#" class="mylink" data-deptno="101">컴퓨터공학과</a>
+    <a href="#" class="mylink" data-deptno="102">멀티미디어학과</a>
+    <a href="#" class="mylink" data-deptno="201">전자공학과</a>
+    <a href="#" class="mylink" data-deptno="202">기계공학과</a>
+
+    <dl id="container">
+      <dt>학과번호</dt>
+      <dd class="id"></dd>
+      <dt>학과명</dt>
+      <dd class="dname"></dd>
+      <dt>학과위치</dt>
+      <dd class="loc"></dd>
+    </dl>
+
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+  </body>
+</html>

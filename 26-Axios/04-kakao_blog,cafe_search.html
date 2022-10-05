@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #loading {
+        width: 100px;
+        height: 100px;
+        background: url(img/loading.gif) no-repeat/cover;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999999;
+        display: none;
+      }
+
+      #loading.active {
+        display: block;
+      }
+
+      body {
+        font-family: Arial;
+        padding-top: 127px;
+      }
+
+      #header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        z-index: 1000;
+        padding: 0px 10px 5px 10px;
+        box-sizing: border-box;
+      }
+
+      #list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #list li {
+        border-bottom: 1px dotted #d5d5d5;
+      }
+
+      #list li:first-child {
+        border-bottom: 1px dotted #d5d5d5;
+      }
+
+      #list a {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        width: auto;
+        min-height: 120px;
+        padding: 10px;
+        position: relative;
+        color: black;
+        text-decoration: none;
+      }
+
+      #list li a img {
+        display: block;
+        width: 150px;
+        height: 150px;
+        flex: none;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+
+      #list a .text {
+        flex: 1;
+      }
+
+      #list a h2 {
+        font-size: 16px;
+        overflow-y: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+      }
+
+      #list a span {
+        font-size: 10px;
+      }
+
+      #list span.info::after {
+        content: "|";
+        margin-left: 7px;
+        margin-right: 7px;
+      }
+
+      #list span.info:last-child:after {
+        content: "";
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading"></div>
+
+    <div id="header">
+      <h1>Kakao BLOG, CAFE search</h1>
+
+      <form id="searchForm">
+        <fieldset>
+          <select name="source" id="source">
+            <option value="blog">블로그 검색</option>
+            <option value="cafe">카페 검색</option>
+          </select>
+          <input type="search" id="query" placeholder="Search ..." />
+          <button type="submit">검색</button>
+        </fieldset>
+      </form>
+    </div>
+
+    <ul id="list">
+      <!-- <li>
+        <a href="#" target="_blank" class="ust-thumbnail">
+          <img src="img/noimage.jpg" />
+          <div class="text">
+            <h2>글 제목</h2>
+            <p>본문내용...</p>
+            <span class="info">카페/블로그 이름</span>
+            <span class="info">작성일시</span>
+          </div>
+        </a>
+      </li> -->
+    </ul>
+
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script>
+      const KAKAO_REST_KEY = "9bd9f69d6c9fd1d1e706c5e89dcded62";
+
+      let source = null;
+
+      let currentPage = 1;
+
+      let queryKeyword = null;
+
+      let isEnd = false;
+
+      document.querySelector("#searchForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const sourceField = document.querySelector("#source");
+        source = sourceField.value.trim();
+
+        const queryField = document.querySelector("#query");
+        queryKeyword = queryField.value.trim();
+
+        if (!queryKeyword) {
+          alert("검색어를 입력하세요");
+          queryField.focus();
+          return;
+        }
+
+        currentPage = 1;
+        search();
+      });
+
+      window.addEventListener("scroll", (e) => {
+        if (isEnd || document.querySelector("#loading").classList.contains("active")) {
+          return;
+        }
+
+        const scrollTop = window.scrollY;
+
+        const widowHeight = window.screen.availHeight;
+
+        const documentHeight = document.body.scrollHeight;
+
+        if (scrollTop + widowHeight >= documentHeight) {
+          currentPage++;
+          search();
+        }
+      });
+
+      /** Ajax 요청 후 결과를 화면에 HTMl로 출력하는 함수 */
+      async function search() {
+        const loading = document.querySelector("#loading");
+
+        loading.classList.add("active");
+
+        const list = document.querySelector("#list");
+
+        if (currentPage == 1) {
+          Array.from(list.getElementsByTagName("li")).forEach((v, i) => {
+            list.removeChild(v);
+          });
+        }
+
+        let json = null;
+
+        try {
+          json = await axios.get(`https://dapi.kakao.com/v2/search/${source}`, {
+            params: {
+              query: queryKeyword,
+              page: currentPage,
+            },
+            headers: {
+              Authorization: `KakaoAK ${KAKAO_REST_KEY}`,
+            },
+          });
+
+          console.log(json);
+        } catch (error) {
+          console.error(`[Error Code] ${error.code}`);
+          console.error(`[Error Message] ${error.message}`);
+          let alertMsg = error.message;
+
+          if (error.response !== undefined) {
+            const errorMsg = `${error.response.status} error - ${error.response.statusText}`;
+            console.error(`[HTTP Status] ${errorMsg}`);
+
+            alertMsg += `\n${errorMsg}`;
+          }
+
+          alert(alertMsg);
+          return;
+        } finally {
+          loading.classList.remove("active");
+        }
+
+        const { data } = json;
+
+        ifEnd = data.meta.is_end;
+
+        data.documents.forEach((v, i) => {
+          const li = document.createElement("li");
+          list.appendChild(li);
+
+          const a = document.createElement("a");
+          a.setAttribute("href", v.url);
+          a.setAttribute("target", "_blank");
+          li.appendChild(a);
+
+          const img = document.createElement("img");
+          img.setAttribute("src", v.thumbnail || "img/noimage.jpg");
+          a.appendChild(img);
+
+          const div = document.createElement("div");
+          div.classList.add("text");
+          a.appendChild(div);
+
+          const h2 = document.createElement("h2");
+          h2.innerHTML = v.title;
+          div.appendChild(h2);
+
+          const p = document.createElement("p");
+          p.innerHTML = v.contents;
+          div.appendChild(p);
+
+          const span1 = document.createElement("span");
+          span1.innerHTML = v.blogname || v.cafename;
+          span1.classList.add("info");
+          div.appendChild(span1);
+
+          const date = new Date(v.datetime);
+          const span2 = document.createElement("span");
+          span2.innerHTML = date.toLocaleString();
+          span2.classList.add("info");
+          div.appendChild(span2);
+        });
+      }
+    </script>
+  </body>
+</html>
