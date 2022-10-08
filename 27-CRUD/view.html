@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- header -->
+      <div data-include="inc/header.html"></div>
+      <!-- body -->
+      <section>
+        <dl>
+          <dt>학과번호</dt>
+          <dd class="id"></dd>
+          <dt>학과명</dt>
+          <dd class="dname"></dd>
+          <dt>학과위치</dt>
+          <dd class="loc"></dd>
+        </dl>
+        <a href="index.html">목록보기</a> | <a href="#" class="btn-edit">수정하기</a>
+        <a href="#" class="btn-delete">삭제하기</a>
+      </section>
+      <!-- footer -->
+      <div data-include="inc/footer.html"></div>
+    </div>
+
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script src="assets/js/include.js"></script>
+    <script type="module">
+      import utilhelper from "../helper/UtilHelper.js";
+
+      // 페이지가 실행되면서 자동으로 동작해야 하므로 즉시실행함수형태로 구현
+      (async () => {
+        /** GET 파라미터 받기 */
+        const params = utilhelper.getUrlParams();
+
+        // 파라미터가 정상적이지 않으므로 메시지 출력, 전페이지이동 처리 후 수행 중단(return)
+        if (!params.id) {
+          alert("학과번호가 없습니다.");
+          history.back();
+          return;
+        }
+
+        /** Ajax 요청 */
+        let json = null;
+
+        try {
+          const response = await axios.get(`http://localhost:3001/department/${params.id}/`);
+          json = response.data;
+        } catch (e) {
+          console.error(e);
+          alert("요청을 처리하는데 실패했습니다.");
+          return;
+        }
+
+        document.querySelector(".id").innerHTML = json.id;
+        document.querySelector(".dname").innerHTML = json.dname;
+        document.querySelector(".loc").innerHTML = json.loc;
+
+        // 가져온 데이터의 일련번호를 사용하여 어떤 대상을 수정할지에 대한 링크 URL 구성
+        document.querySelector(".btn-edit").setAttribute("href", `edit.html?id=${json.id}`);
+
+        // 가져온 데이터의 일련번호를 사용하여 어떤 대상을 삭제할지에 대한 dataset 구성
+        const btnDelete = document.querySelector(".btn-delete");
+        btnDelete.dataset.id = json.id;
+        btnDelete.dataset.dname = json.dname;
+      })();
+
+      /** 삭제 버튼에 대한 클릭 이벤트 */
+      document.querySelector(".btn-delete").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const current = e.currentTarget;
+        const id = current.dataset.id;
+        const dname = current.dataset.dname;
+
+        if (confirm(`정말 ${dname}(을)를 삭제하시겠습니까?`)) {
+          try {
+            await axios.delete(`http://localhost:3001/department/${id}`);
+          } catch (e) {
+            consoel.error(e);
+            alert("요청을 처리하는데 실패했습니다.");
+            return;
+          }
+
+          window.location.href = "index.html";
+          alert("삭제되었습니다.");
+        }
+      });
+    </script>
+  </body>
+</html>

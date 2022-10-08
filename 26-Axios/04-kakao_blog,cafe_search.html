@@ -136,35 +136,46 @@
 
     <script src="../node_modules/axios/dist/axios.min.js"></script>
     <script>
+      /** KAKAO REST KEY */
       const KAKAO_REST_KEY = "9bd9f69d6c9fd1d1e706c5e89dcded62";
 
+      /** 검색 위치 */
       let source = null;
 
+      /** 페이지 번호 */
       let currentPage = 1;
 
+      /** 검색어 */
       let queryKeyword = null;
 
+      /** 마지막 페이지인지 검사 */
       let isEnd = false;
 
+      /** 검색폼의 submit 이벤트 - 신규검색 */
       document.querySelector("#searchForm").addEventListener("submit", (e) => {
         e.preventDefault();
 
+        // 검색 대상을 가져온다.
         const sourceField = document.querySelector("#source");
         source = sourceField.value.trim();
 
+        // 입력된 검색어를 가져온다.
         const queryField = document.querySelector("#query");
         queryKeyword = queryField.value.trim();
 
+        // 검색어가 입력되지 않은 경우에 대한 예외 처리
         if (!queryKeyword) {
           alert("검색어를 입력하세요");
           queryField.focus();
           return;
         }
 
+        // 신규검색
         currentPage = 1;
         search();
       });
 
+      /** 스크롤 이벤트 - 추가검색 */
       window.addEventListener("scroll", (e) => {
         if (isEnd || document.querySelector("#loading").classList.contains("active")) {
           return;
@@ -184,18 +195,22 @@
 
       /** Ajax 요청 후 결과를 화면에 HTMl로 출력하는 함수 */
       async function search() {
+        // 로딩바 객체
         const loading = document.querySelector("#loading");
-
+        // 로딩바 화면에 표시하기
         loading.classList.add("active");
 
+        // 검색 결과가 표시될 영역
         const list = document.querySelector("#list");
 
+        // 1페이지에 대한 요청일 경우 기존에 표시되고 있던 검색결과가 있다면 삭제한다.
         if (currentPage == 1) {
           Array.from(list.getElementsByTagName("li")).forEach((v, i) => {
             list.removeChild(v);
           });
         }
 
+        // 검색결과를 저장할 빈 변수
         let json = null;
 
         try {
@@ -209,6 +224,7 @@
             },
           });
 
+          // 응답결과 확인
           console.log(json);
         } catch (error) {
           console.error(`[Error Code] ${error.code}`);
@@ -225,11 +241,13 @@
           alert(alertMsg);
           return;
         } finally {
+          // 로딩바 닫기
           loading.classList.remove("active");
         }
 
         const { data } = json;
 
+        // 다음 페이지를 요청할 수 있는지를 판단하기 위한 값.
         ifEnd = data.meta.is_end;
 
         data.documents.forEach((v, i) => {

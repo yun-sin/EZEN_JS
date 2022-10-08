@@ -115,41 +115,50 @@
           return;
         }
 
+        // 신규검색
         currentPage = 1;
         get_image_search();
       });
 
+      /** 스크롤 이벤트 - 추가검색 */
       window.addEventListener("scroll", (e) => {
         if (isEnd || document.querySelector("#loading").classList.contains("active")) {
           return;
         }
 
+        // 스크롤바의 Y좌표
         const scrollTop = window.scrollY;
-
-        const widowHeight = window.screen.availHeight;
-
+        // 웹 브라우저의 창 높이
+        const windowHeight = window.screen.availHeight;
+        // HTML 문서의 높이
         const documentHeight = document.body.scrollHeight;
 
-        if (scrollTop + widowHeight >= documentHeight) {
+        // 스크롤바의 반동 효과를 고려해서 scrollTop + windowHeight가 실제 화면 크기보다 커질수도 있다.
+        if (scrollTop + windowHeight >= documentHeight) {
+          // 2페이지 이후는 추가 검색
           currentPage++;
-          get_image_search;
+          get_image_search();
         }
       });
 
       /** Ajax 요청 후 결과를 화면에 HTMl로 출력하는 함수 */
       async function get_image_search() {
+        // 로딩바 객체
         const loading = document.querySelector("#loading");
-
+        // 로딩바 화면에 표시하기
         loading.classList.add("active");
 
+        // 검색 결과가 표시될 영역
         const list = document.querySelector("#list");
 
+        // 1페이지에 대한 요청일 경우 기존에 표시되고 있던 검색결과가 있다면 삭제한다.
         if (currentPage == 1) {
           Array.from(list.getElementsByTagName("li")).forEach((v, i) => {
             list.removeChild(v);
           });
         }
 
+        // 검색결과를 저장할 빈 변수
         let json = null;
 
         try {
@@ -163,6 +172,7 @@
             },
           });
 
+          // 응답결과 확인
           console.log(json);
         } catch (error) {
           console.error(`[Error Code] ${error.code}`);
@@ -179,12 +189,14 @@
           alert(alertMsg);
           return;
         } finally {
+          // 로딩바 닫기
           loading.classList.remove("active");
         }
 
         const { data } = json;
 
-        ifEnd = data.meta.is_end;
+        // 다음 페이지를 요청할 수 있는지를 판단하기 위한 값.
+        isEnd = data.meta.is_end;
 
         data.documents.map((v, i) => {
           const li = document.createElement("li");

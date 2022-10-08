@@ -63,5 +63,82 @@
     </dl>
 
     <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script>
+      // 링크 객체
+      const mylink = document.querySelectorAll(".mylink");
+
+      // 결과를 출력할 컨테이너 객체
+      const container = document.querySelector("#container");
+
+      /** 링크 객체에 대한 반복 처리 */
+      mylink.forEach((v, i) => {
+        /** 각각의 링크객체(v)에게 click 이벤트 정의 */
+        v.addEventListener("click", async (e) => {
+          e.preventDefault();
+
+          // 로딩바 표시가
+          const loading = document.querySelector("#loading");
+          loading.classList.add("active");
+
+          // 링크에 숨겨진 data-deptno 의 값을 가져옴
+          const deptno = e.currentTarget.dataset.deptno;
+
+          // 검색결과를 저장할 빈 변수
+          let json = null;
+
+          try {
+            const response = await axios.get(`http://localhost:3001/department/${deptno}`);
+            json = response.data;
+          } catch (error) {
+            // Axios의 기본 에러 메시지를 추출하여 문자열로 구성
+            console.error(`[Error Code] ${error.code}`);
+            console.error(`[Error Message] ${error.message}`);
+            let alertMsg = error.message;
+
+            // HTTP 상태메시지가 포함되어 있다면 해당 내용을 에러 문자열에 추가
+            if (error.message !== undefined) {
+              const erroeMsg = `${error.response.status} error - ${error.response.statusText}`;
+              console.error(`[HTTP Status] ${errorMsg}`);
+              alertMsg += `\n${errorMsg}`;
+            }
+
+            // 메시지박스로 에러 내용 표시
+            alert(alertMsg);
+
+            // catch에서 return을 하더라도 finally가 수행된 후 실행이 취소된다.
+            return;
+          } finally {
+            // 로딩바 닫기
+            loading.classList.remove("active");
+          }
+
+          // Ajax의 응답결과를 구조분해하여 개별 변수로 추출
+          const { id, dname, loc } = json;
+
+          // 추출한 결과를 미리 준비한 HTML 구조에 출력하고 컨테이너를 화면에 표시함.
+          container.querySelector(".id").innerHTML = id;
+          container.querySelector(".dname").innerHTML = dname;
+          container.querySelector(".loc").innerHTML = loc;
+          container.style.display = "block";
+
+          // 현재 페이지를 표시하는데 사용된 데이터와 URL을 히스토리에 추가. (페이지 이동 효과)
+          const state = { data: JSON.stringify(json) };
+          const url = "01-dept_item_axios.html?deptno=" + deptno;
+          history.pushState(state, null, url);
+        });
+      });
+
+      /** history가 이전 페이지로 되돌아 갈 때 발생하는 이벤트 */
+      window.addEventListener("popstate", (e) => {
+        if (e.state) {
+          const json = JSON.parse(e.state.data);
+          container.querySelector(".id").innerHTML = json.id || "";
+          container.querySelector(".dname").innerHTML = json.dname || "";
+          container.querySelector(".loc").innerHTML = json.loc || "";
+        } else {
+          contaier.style.display = "none";
+        }
+      });
+    </script>
   </body>
 </html>

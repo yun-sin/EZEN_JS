@@ -35,43 +35,43 @@
       </section>
       <!-- footer -->
       <div data-include="inc/footer.html"></div>
-
-      <script src="../node_modules/axios/dist/axios.min.js"></script>
-      <script src="assets/js/include.js"></script>
-      <script>
-        document.querySelector("#department-form").addEventListener("submit", async (e) => {
-          e.preventDefault();
-
-          // 입력값 받아오기
-          const dname = document.querySelector("#dname").value;
-          const loc = document.querySelector("#loc").value;
-
-          /**
-           * 입력값에 대한 유효성 검사 진행.... (이 예제에서는 생략)
-           */
-
-          let json = null;
-
-          try {
-            // 대부분의 backend가 일련번호는 자체적으로 생성하기 때문에 create에 해당하는 데이터 추가 처리에서는 백엔드에게
-            // 일련번호를 제외한 변수만 전달해야 한다.
-            const response = await axios.post("http://localhost:3001/department", {
-              dname: dname,
-              loc: loc,
-            });
-            json = response.data;
-          } catch {
-            console.error(e);
-            alert("요청을 처리하는데 실패했습니다.");
-            return;
-          }
-
-          // 백엔드에서 데이터 저장에 대한 응답으로 보낸 JSON에는 생성된 신규 항목에 대한 일련번호가 포함되어 있다.
-          // 이 값을 활용하여 상세 페이지로 이동해야 한다.
-          // 이 때, 어떤 대상을 열람할 것인지에 대한 GET 파라미터를 구성한다.
-          window.location = `view.html?id=${json.id}`;
-        });
-      </script>
     </div>
+
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script src="assets/js/include.js"></script>
+    <script>
+      document.querySelector("#department-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // 입력값 받아오기
+        const dname = document.querySelector("#dname").value;
+        const loc = document.querySelector("#loc").value;
+
+        /**
+         * 입력값에 대한 유효성 검사 진행.... (이 예제에서는 생략)
+         */
+
+        let json = null;
+
+        try {
+          // 대부분의 backend가 일련번호는 자체적으로 생성하기 때문에 create에 해당하는 데이터 추가 처리에서는 백엔드에게
+          // 일련번호를 제외한 변수만 전달해야 한다.
+          const response = await axios.post("http://localhost:3001/department", {
+            dname: dname,
+            loc: loc,
+          });
+          json = response.data;
+        } catch {
+          console.error(e);
+          alert("요청을 처리하는데 실패했습니다.");
+          return;
+        }
+
+        // 백엔드에서 데이터 저장에 대한 응답으로 보낸 JSON에는 생성된 신규 항목에 대한 일련번호가 포함되어 있다.
+        // 이 값을 활용하여 상세 페이지로 이동해야 한다.
+        // 이 때, 어떤 대상을 열람할 것인지에 대한 GET 파라미터를 구성한다.
+        window.location = `index.html?id=${json.id}`;
+      });
+    </script>
   </body>
 </html>
